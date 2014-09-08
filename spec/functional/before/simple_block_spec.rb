@@ -12,9 +12,7 @@ describe AOP do
           @count = 21
         end
       end
-      it 'is called correctly' do
-        expect( subject.main1 ).to eq 42
-      end
+      it{ expect( subject.main1 ).to eq 42 }
     end # context 'simple before'
 
     context 'with params' do 
@@ -26,9 +24,7 @@ describe AOP do
           @a = a
         end
       end
-      it 'is called correctly' do
-        expect( subject.main2 1 ).to eq 3
-      end
+      it{ expect( subject.main2 1 ).to eq 3 }
     end # context 'with params'
     context 'with params, and blocks' do 
       before do
@@ -39,9 +35,7 @@ describe AOP do
           @a = b.( a )
         end
       end
-      it 'is called correctly' do
-        expect( subject.main3(1){|a| 10*a} ).to eq 210
-      end
+      it{ expect( subject.main3(1){|a| 10*a} ).to eq 210 }
     end # context 'with params'
   end # context 'block filters, simple before'
 end # describe AOP

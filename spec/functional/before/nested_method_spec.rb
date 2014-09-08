@@ -16,9 +16,7 @@ describe AOP do
         end
         class_under_test.before :main1, [:before2, :before1]
       end
-      it 'is called correctly' do
-        expect( subject.main1 ).to eq 42
-      end
+      it{ expect( subject.main1 ).to eq 42 }
     end # context 'nested before'
 
     context 'with params' do
@@ -35,9 +33,7 @@ describe AOP do
         class_under_test.before :main2, :before2
         class_under_test.before :main2, :before1
       end
-      it 'is called correctly' do
-        expect( subject.main2 1 ).to eq 23
-      end
+      it{ expect( subject.main2 1 ).to eq 23 }
     end # context 'with params'
 
     context 'with params, and blocks' do 
@@ -53,9 +49,7 @@ describe AOP do
         end
         class_under_test.before :main3, [:before2, :before1]
       end
-      it 'is called correctly' do
-        expect( subject.main3(1){|a| 10*a} ).to eq 2210
-      end
+      it{ expect( subject.main3(1){|a| 10*a} ).to eq 2210 }
     end # context 'with params'
   end # context 'method filters'
 end # describe AOP
