@@ -6,13 +6,13 @@ describe AOP do
     context 'no params' do
       before do
         class_under_test.new_method :main1 do
-          @count ||= 1
+          @c ||= 1
         end
         class_under_test.new_method :after11 do
-          @count *= 2
+          @c *= 2
         end
         class_under_test.new_method :after12 do
-          @count += 1
+          @c += 1
         end
         class_under_test.after :main1, [:after11, :after12] # (* Good ol Pascal comments *)
       end
@@ -21,7 +21,7 @@ describe AOP do
       end
       it 'has side effects (executed in definition order)' do
         subject.main1
-        expect( subject.count ).to eq 3
+        expect( subject.c ).to eq 3
       end
     end # context 'simple before'
 

@@ -1,6 +1,7 @@
 require_relative 'aop/after'
 require_relative 'aop/before'
 require_relative 'aop/param_filter'
+require_relative 'aop/result_filter'
 
 module Lab42
   module AOP
@@ -24,6 +25,14 @@ module Lab42
         ParamFilter.with_block( self, *args, &blk )
       else
         ParamFilter.with_methods( self, *args )
+      end
+    end
+
+    def result_filter *args, &blk
+      if blk
+        ResultFilter.with_block( self, *args, &blk )
+      else
+        ResultFilter.with_methods( self, *args, &blk )
       end
     end
   end # module AOP

@@ -12,7 +12,8 @@ RSpec.configure do | c |
     self.class.let :class_under_test do
       Class.new.extend( AOP ).tap do | klass |
         # Implement automatic access to instance variables
-        klass.send :define_method, :method_missing do |name|
+        klass.send :define_method, :method_missing do |name, *args, &b|
+          super name, *args, &b if name.size > 1 || !args.empty? || b
           instance_variable_get "@#{name}".sub(/\A@@/,'@')
         end
         # Implement an on_init class method

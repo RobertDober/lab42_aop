@@ -6,10 +6,10 @@ describe AOP do
     context 'no params' do
       before do
         class_under_test.new_method :main1 do
-          @count
+          @c
         end
         class_under_test.after :main1 do
-          @count = 21
+          @c = 21
         end
       end
       it 'does not influence the result' do
@@ -17,7 +17,7 @@ describe AOP do
       end
       it 'but has side effects' do
         subject.main1
-        expect( subject.count ).to eq 21
+        expect( subject.c ).to eq 21
       end
     end # context 'simple before'
 
