@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe AOP, :wip do
+describe AOP do
 
   context 'param filters when' do
     before do
