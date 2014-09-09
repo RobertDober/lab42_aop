@@ -46,5 +46,24 @@ And if we nest now
     g.main(1){|x| x}.assert.nil?
 ```
 
+The definition order is however, also the execution order for `after` aspects, and not the reverse as for `before`
+aspects:
+
+```ruby
+    class G
+      attr_reader :a
+      def init_a; @a = 0 end
+      after :init_a do
+        @a += 1
+      end
+      after :init_a do
+        @a *= 2
+      end
+    end
+
+    g = G.new
+    g.init_a
+    g.a.assert == 2
+```
 
 

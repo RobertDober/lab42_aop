@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe AOP, :wip do
+describe AOP do
 
   context 'method aspects, simple after' do 
     context 'no params' do 
@@ -39,7 +39,7 @@ describe AOP, :wip do
     context 'with params and blocks' do 
       before do
         class_under_test.new_method :after3 do |a, &b|
-          @a = 0
+          @a = b.(0)
         end
         class_under_test.new_method :main3 do |a, &b|
           b.(@a + a)
@@ -52,7 +52,7 @@ describe AOP, :wip do
       end
       it 'but it has its side effects' do
         subject.main3(100, &:pred)
-        expect( subject.a ).to be_zero
+        expect( subject.a ).to eq -1
       end
     end # context 'with params and blocks'
 
