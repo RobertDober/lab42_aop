@@ -1,7 +1,7 @@
 require 'spec_helper'
 
 describe AOP do
-  context 'method filters, nested before' do 
+  context 'method filters, nested before' do
 
     context 'no params' do
       before do

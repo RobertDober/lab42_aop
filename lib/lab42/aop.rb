@@ -1,3 +1,4 @@
+require_relative 'aop/cross_concern'
 require_relative 'aop/after'
 require_relative 'aop/before'
 require_relative 'aop/param_filter'

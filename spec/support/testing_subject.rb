@@ -2,6 +2,12 @@
 class Class
   alias_method :new_method, :define_method
   public :new_method
+
+  def null_methods *names
+    names.each do | name |
+      define_method name do |*a,&b| end
+    end
+  end 
 end
 
 RSpec.configure do | c |
