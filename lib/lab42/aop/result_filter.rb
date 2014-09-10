@@ -27,7 +27,12 @@ module Lab42
       def _define_method_result_filter rcv, tgt, aop
         original_method = rcv.instance_method tgt
         rcv.send :define_method, tgt do |*a, &b|
-          send aop, original_method.bind( self ).( *a, &b ), *a, &b
+          aop_method = method aop
+          if aop_method.arity < 0
+            aop_method.( original_method.bind( self ).( *a, &b ), *a, &b )
+          else
+            aop_method.( original_method.bind( self ).( *a, &b ), &b )
+          end
         end
       end
     end # module ResultFilter
