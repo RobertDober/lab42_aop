@@ -2,12 +2,12 @@
 
 ## Before
 
-Before hoox are used to execute code in the context of the receiving object **before** a method.
+Before aspects are used to execute code in the context of the receiving objects **before** a method.
 
-This code is executed for its side effects as the parameters are passed into all hoox and the 
+This code is executed for its side effects as the parameters are passed into all aspects and the 
 eventual method _identically_.
 
-The code of a hook can be specified by means of the name of a different method (à la Rails) or
+The code of an aspect can be specified by means of the name of a different method (à la Rails) or
 by a code block.
 
 Here is a most simple example:
@@ -36,7 +36,7 @@ Here is a most simple example:
       
 ```
 
-### Nesting Before Hoox
+### Nesting Before Aspects
 
 As might be not so surprising the before hoox ( and all other in this gem ) are executed in reverse order of definition.
 
@@ -88,5 +88,35 @@ That does not mean we cannot use them inside the hoox. Here as a demonstration o
         @stored = values.map{1}
       end
     }.assert == 55
+```
+
+## Specifying the Cross Concern
+
+All this is nice and might be useful, but the **real** power of AOP is to specify cross concerns, e.g. all methods starting with an `a` 
+
+Here are some examples how to specify that kind of behavior:
+
+```ruby
+    class CC
+      extend AOP
+      attr_reader :count
+      
+      def a1; end
+      def a2; end
+      def b1; end
+      before %r{\Aa} do
+        @count ||= 0
+        @count += 1
+      end
+    end
+
+    cc = CC.new
+    cc.a1
+    cc.a2
+    cc.b1
+    cc.b1
+    cc.a2
+    cc.count.assert == 3
+
 ```
 

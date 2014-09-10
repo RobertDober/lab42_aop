@@ -54,7 +54,7 @@ and a parameter filter and a result filter
       def add1 n; n.succ end
       
       param_filter :before_with_after, :add1
-      result_filter :before_with_after, &[:*, 2]
+      result_filter :before_with_after do |x| x*2 end
     end
     
     a1 = A1.new
