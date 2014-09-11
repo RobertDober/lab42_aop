@@ -32,10 +32,13 @@ module Lab42
       end
 
       def _define_method_around tgt_concern, aop
+        result = nil
         tgt_concern.cls.send :define_method, tgt_concern.name do |*a, &b|
-          tgt_concern.mthd.bind( self ).( *a, &b ).tap do
-            send( aop, *a, &b )
+          result_wrapper = -> (*args, &inner_blk) do
+            result = tgt_concern.mthd.bind( self ).(*args, &inner_blk)
           end
+          send aop, result_wrapper, *a, &b
+          result
         end
       end
     end # module Around
