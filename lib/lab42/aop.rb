@@ -1,5 +1,6 @@
 require_relative 'aop/cross_concern'
 require_relative 'aop/after'
+require_relative 'aop/around'
 require_relative 'aop/before'
 require_relative 'aop/param_filter'
 require_relative 'aop/result_filter'
@@ -11,6 +12,13 @@ module Lab42
         After.with_block( self, *args, &blk )
       else
         After.with_methods( self, *args )
+      end
+    end
+    def around *args, &blk
+      if blk
+        Around.with_block( self, *args, &blk )
+      else
+        Around.with_methods( self, *args )
       end
     end
     def before *args, &blk
