@@ -1,4 +1,3 @@
-
 module Lab42
   module AOP
     module Before extend self

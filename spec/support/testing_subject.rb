@@ -3,9 +3,10 @@ class Class
   alias_method :new_method, :define_method
   public :new_method
 
-  def null_methods *names
+  def null_methods *names, &blk
+    blk ||= -> (*a, &b) { a }
     names.each do | name |
-      define_method name do |*a,&b| end
+      define_method name, &blk
     end
   end 
 end
