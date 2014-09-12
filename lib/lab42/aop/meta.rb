@@ -5,6 +5,14 @@ module Lab42
         class << objct; self end.module_eval do
           define_method name, &method
         end
+        objct
+      end
+
+      def add_attribute objct, att_name
+        class << objct; self end.module_eval do
+          attr_accessor att_name
+        end
+        objct
       end
     end # module Meta
   end # module AOP
