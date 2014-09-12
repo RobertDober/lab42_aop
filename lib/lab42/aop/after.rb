@@ -1,16 +1,16 @@
 module Lab42
   module AOP
     module After extend self
-      def with_block rcv, tgts, &blk
-        concerns = CrossConcern.get_methods rcv, Array( tgts )
+      def with_block rcv, tgts, **kwds, &blk
+        concerns = CrossConcern.get_methods rcv, Array( tgts ), **kwds
         concerns.each do | tgt_concern |
           _define_block_after tgt_concern, blk
         end
       end
 
-      def with_methods rcv, tgts, aops
+      def with_methods rcv, tgts, aops, **kwds
         Array( aops ).each do | aop |
-          concerns = CrossConcern.get_methods rcv, Array( tgts )
+          concerns = CrossConcern.get_methods rcv, Array( tgts ), **kwds
           concerns.each do | tgt_concern |
             _define_method_after tgt_concern, aop
           end

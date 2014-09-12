@@ -18,6 +18,8 @@ module Lab42
           candidates - exclude
         when Symbol
           candidates - Array( exclude )
+        when Regexp
+          candidates - candidates.grep( exclude )
         end
       end
       def _get_methods cls, mthd_spec, include_included: false, exclude: nil

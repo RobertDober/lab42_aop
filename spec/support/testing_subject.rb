@@ -11,7 +11,15 @@ class Class
   end 
 end
 
+module AOPModuleHelper
+  def aop_module &blk
+    Module.new( &blk ).extend AOP
+  end
+end # module AOPModuleHelper
+
 RSpec.configure do | c |
+  c.include AOPModuleHelper
+
   c.before do
     self.class.subject do
       class_under_test.new

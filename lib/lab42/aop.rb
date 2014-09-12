@@ -11,41 +11,41 @@ require_relative 'aop/result_filter'
 
 module Lab42
   module AOP
-    def after *args, &blk
+    def after *args, **kwds, &blk
       if blk
-        After.with_block( self, *args, &blk )
+        After.with_block( self, *args, **kwds, &blk )
       else
-        After.with_methods( self, *args )
+        After.with_methods( self, *args, **kwds )
       end
     end
-    def around *args, &blk
+    def around *args, **kwds, &blk
       if blk
-        Around.with_block( self, *args, &blk )
+        Around.with_block( self, *args, **kwds, &blk )
       else
-        Around.with_methods( self, *args )
+        Around.with_methods( self, *args, **kwds )
       end
     end
-    def before *args, &blk
+    def before *args, **kwds, &blk
       if blk
-        Before.with_block( self, *args, &blk )
+        Before.with_block( self, *args, **kwds, &blk )
       else
-        Before.with_methods( self, *args )
-      end
-    end
-
-    def param_filter *args, &blk
-      if blk
-        ParamFilter.with_block( self, *args, &blk )
-      else
-        ParamFilter.with_methods( self, *args )
+        Before.with_methods( self, *args, **kwds )
       end
     end
 
-    def result_filter *args, &blk
+    def param_filter *args, **kwds, &blk
       if blk
-        ResultFilter.with_block( self, *args, &blk )
+        ParamFilter.with_block( self, *args, **kwds, &blk )
       else
-        ResultFilter.with_methods( self, *args, &blk )
+        ParamFilter.with_methods( self, *args, **kwds )
+      end
+    end
+
+    def result_filter *args, **kwds, &blk
+      if blk
+        ResultFilter.with_block( self, *args, **kwds, &blk )
+      else
+        ResultFilter.with_methods( self, *args, **kwds, &blk )
       end
     end
   end # module AOP
