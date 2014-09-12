@@ -26,6 +26,7 @@ module Lab42
           result_wrapper = -> (*args, &inner_blk) do
             result = tgt_concern.mthd.bind( self ).(*args, &inner_blk)
           end
+          Meta.add_singleton_method( result_wrapper, :name ){ tgt_concern.name }
           send unique_name, result_wrapper, *a, &b
           result
         end
@@ -37,6 +38,7 @@ module Lab42
           result_wrapper = -> (*args, &inner_blk) do
             result = tgt_concern.mthd.bind( self ).(*args, &inner_blk)
           end
+          Meta.add_singleton_method( result_wrapper, :name ){ tgt_concern.name }
           send aop, result_wrapper, *a, &b
           result
         end

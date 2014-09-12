@@ -1,9 +1,12 @@
+require_relative 'aop/meta'
+
 require_relative 'aop/cross_concern'
 require_relative 'aop/after'
 require_relative 'aop/around'
 require_relative 'aop/before'
 require_relative 'aop/param_filter'
 require_relative 'aop/result_filter'
+
 
 module Lab42
   module AOP
