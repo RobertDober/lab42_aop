@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe AOP, :wip do
+describe AOP do
   context 'after aspects with module concerns' do
     let( :mod1 ){ aop_module{
       def a1; end
