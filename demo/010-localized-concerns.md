@@ -77,13 +77,12 @@ Now, after all these bold statements, let us prove them.
 
 ```
 
-### Using Around for the access to the concern only
+### Using Around to gain access to the concern, although we just implement before or after with it. 
 
 It makes perfect sense to use an `around` aspect for `before` or `after` concerns if one needs
 to access the concern (as we did not want to clutter the other APIs).
 
-A part of messaging, we might want to save messages to a kind of persistent storage, and we still want
-to log this.
+Assuming we want to save messages to a kind of persistent storage, and we want to log this.
 
 ```ruby
     module Storage
@@ -118,5 +117,3 @@ Again, please imagine a complex `Storage`  module with a plethora of `store_*` m
     worker.storage.assert == [42] # N.B. No logging here
     Logger.log.assert == [ ["store: [42]"] ]
 ```
-
-

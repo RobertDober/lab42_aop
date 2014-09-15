@@ -2,6 +2,8 @@ require_relative 'aop/meta'
 require_relative 'aop/tools'
 
 require_relative 'aop/cross_concern'
+# require_relative 'aop/concern_scope'
+
 require_relative 'aop/after'
 require_relative 'aop/around'
 require_relative 'aop/before'
@@ -33,6 +35,13 @@ module Lab42
       end
     end
 
+    # def concern_scope &blk
+    #   _scopes << Module.new(&blk) # Just to know the methods defined
+    #   module_eval &blk
+    # ensure
+    #   _scopes.pop
+    # end
+
     def param_filter *args, **kwds, &blk
       if blk
         ParamFilter.with_block( self, *args, **kwds, &blk )
@@ -48,5 +57,7 @@ module Lab42
         ResultFilter.with_methods( self, *args, **kwds, &blk )
       end
     end
+
+    def _scopes; @__scopes__ ||= [] end
   end # module AOP
 end # module Lab42
