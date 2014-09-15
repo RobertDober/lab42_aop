@@ -134,7 +134,7 @@ or _weired_ combinations thereof
     end
     A4.sum( 2, 2 ).assert == 12
    
-    o = Object.new.extend AM3
+    o = Object.new.extend AM2
     o.sum( 3, 3 ).assert == 16
 ```
 
