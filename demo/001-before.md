@@ -94,7 +94,7 @@ That does not mean we cannot use them inside the hoox. Here as a demonstration o
 
 All this is nice and might be useful, but the **real** power of AOP is to specify cross concerns, e.g. all methods starting with an `a` 
 
-Here are some examples how to specify that kind of behavior:
+Here is an example how to specify that kind of behavior:
 
 ```ruby
     class CC
